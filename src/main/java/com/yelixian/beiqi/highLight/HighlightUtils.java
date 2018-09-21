@@ -11,6 +11,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.Arrays;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class HighlightUtils {
 
@@ -43,29 +45,34 @@ public class HighlightUtils {
                 return parentChinese;
             }
 
-            //logger.info("子字符串拼音 " + childEnglish);
+
             //logger.info("父字符串拼音 " + parentEnglish);
+            //logger.info("子字符串拼音 " + childEnglish);
             //获取拼音对应的汉字的下标
             int[] englishPKChinses = getIndex(parentEnglish);
+            //logger.info("englishPKChinses = " + Arrays.toString(englishPKChinses));
             //int[] ans2 = matchEnglish(parentEnglish, childEnglish, englishPKChinses);
 
             //无空格的拼音
             String noSpaceParentEnglish = parentEnglish.replaceAll(CUT_CHAR, "");
             String noSpaceChildEnglish = childEnglish.replaceAll(CUT_CHAR, "");
-
+            //logger.info("父字符串无特殊字符拼音 " + noSpaceParentEnglish);
+            //logger.info("子字符串无特殊字符拼音 " + noSpaceChildEnglish);
             //全拼音
             int[] ans2 = matchEnglish(noSpaceParentEnglish, noSpaceChildEnglish, englishPKChinses);
+            //logger.info("ans2 = " + Arrays.toString(ans2));
 
             //logger.info("ans2=" + Arrays.toString(ans2));
             //汉字加拼音的特殊情况，且汉字重音
             //char[] parentChars = parentChinese.toCharArray();
-
-            //首字母
-            String parentFirstChar = getFirstChar(parentEnglish);
-            String childFirstChar = getFirstChar(childEnglish);
-            logger.info("父字符串首字母 " + parentFirstChar);
-            logger.info("子字符串首字母 " + childFirstChar);
-            int[] ans3 = matchChinese(parentFirstChar, childFirstChar);
+            //首字母，先判断子字符串是否有中文，如果有就不需要判断首字母
+            int[] ans3 = {-1};
+            if (!haveChinese(childChinese)) {
+                String parentFirstChar = getFirstChar(parentEnglish);
+                //logger.info("父字符串首字母 " + parentFirstChar);
+                ans3 = matchNoChinese(parentFirstChar, childChinese);
+                //logger.info("ans3 = " + Arrays.toString(ans3));
+            }
 
             //当两个都有值时，拼接两个结果
             if (ans2[0] != -1 && ans3[0]!=-1) {
@@ -147,7 +154,7 @@ public class HighlightUtils {
                 //如果有汉字就查询该汉字是否在查询的结果中，包含则留下结果否则就丢弃
                 if (childChars[indexChar] >= 0X4e00 && childChars[indexChar] <= 0X9fa5) {
                     //logger.info("parentChars[indexChar] = " + Character.toString(childChars[indexChar]));
-                    int[] ansTemp = matchChinese(parentChinese, Character.toString(childChars[indexChar]));
+                    int[] ansTemp = matchNoChinese(parentChinese, Character.toString(childChars[indexChar]));
                     //logger.info("ansTemp = " + Arrays.toString(ansTemp));
                     //logger.info("ansTest = " + Arrays.toString(ansTest));
                     int tempIndex = 0;
@@ -186,14 +193,52 @@ public class HighlightUtils {
     //添加高亮代码
     private static String getAnsStr(String parentChinese, int[] ans1) {
         int index = 0;
+        int firstE = 0;
+        boolean haveEnglish = false;
+        int[] ans3 = new int[MAXLENGTH];
+        int[] ans2 = getChineseIndex(parentChinese);
+        for (int i=0; ans1[i]!=-1; i++) {
+            //logger.info("ans  " + ans1[i] + " | " + ans2[ans1[i]]);
+            ans3[i] = ans1[i];
+            ans1[i] = ans2[ans1[i]];
+        }
+        //logger.info("emmm");
         StringBuilder ansSb = new StringBuilder(parentChinese);
+        ansSb.append("*");
+        //logger.info("ans3 = " + Arrays.toString(ans3));
+        //logger.info("ans1 = " + Arrays.toString(ans1));
+        //加入html长度
         int length = 0;
+        //英语的长度
+        int eLength;
         while (ans1[index] != -1) {
+
             ansSb.insert(ans1[index++]+length, HTML_PREFIX);
             length += HTML_PREFIX.length();
-            ansSb.insert(ans1[index++]+length+1, HTML_SUFFIX);
+            firstE = ans1[index];
+            //logger.info("firstE = " + index);
+            // 考虑最后一个是不是英语
+            //logger.info("1 ansSb.charAt(firstE+length) = " + ansSb.charAt(firstE+length+eLength));
+            eLength = 0;
+            while ((ansSb.charAt(firstE+length+eLength)>=0x0041 && ansSb.charAt(firstE+length+eLength)<=0x005A) ||
+                    (ansSb.charAt(firstE+length+eLength)>=0x0061 && ansSb.charAt(firstE+length+eLength)<=0x007A)) {
+                eLength++;
+                if (firstE + eLength == ansSb.length()) {
+                    break;
+                }
+            }
+            if (eLength != 0) {
+                eLength--;
+            }
+            //logger.info(" 略略略ansSb.charAt(firstE+length) = " + ansSb.charAt(firstE+length));
+            //logger.info("ansSb = " + ansSb.toString());
+            //logger.info("ans1[index] = " + ans1[index]);
+            //logger.info("ans1[index++]+length+1 = " + ans1[index]+length+1+eLength);
+            ansSb.insert(ans1[index++]+length+1+eLength, HTML_SUFFIX);
+
             length += HTML_SUFFIX.length();
         }
+        ansSb.deleteCharAt(ansSb.length()-1);
         return ansSb.toString();
     }
 
@@ -207,6 +252,22 @@ public class HighlightUtils {
         int mapIndex = 0;
         while((index = parent.indexOf(child, index)) != -1 )
         {
+            //防止字符串匹配部分字符
+            if (index > 0 && index+length<=parent.length()) {
+                if (child.matches("^[a-zA-Z]+$")) {
+                    String temp = parent.substring(index-1, index);
+                    if (temp.matches("^[a-zA-Z]+$")) {
+                        index = index+length;
+                        continue;
+                    }
+                    temp = parent.substring(index+length-1, index+length);
+                    if (temp.matches("^[a-zA-Z]+$")) {
+                        index = index+length;
+                        continue;
+                    }
+                }
+            }
+
             firstIndex = index;
             index = index+length;
             map[mapIndex++] = firstIndex;
@@ -219,9 +280,29 @@ public class HighlightUtils {
 
         return map;
     }
+
+    //左闭右闭，用int数组保存下标, 匹配没有连续的英文
+    private static int[] matchNoChinese(String parent, String child) {
+        int index = 0;
+        int firstIndex = 0;
+        int length = child.length();
+        int[] map = new int[MAXLENGTH];
+        initMap(map);
+        int mapIndex = 0;
+        while((index = parent.indexOf(child, index)) != -1 )
+        {
+            firstIndex = index;
+            index = index+length;
+            map[mapIndex++] = firstIndex;
+            map[mapIndex++] = index-1;
+        }
+        return map;
+    }
+
+
     //转成拼音比较， 拼音下标与汉字下标对应
     private static int[] matchEnglish(String parent, String child, int[] englishPKChinses) {
-        int[] mapTemp = matchChinese(parent, child);
+        int[] mapTemp = matchNoChinese(parent, child);
         int[] map = new int[MAXLENGTH];
         initMap(map);
         int mapIndex = 0;
@@ -261,14 +342,34 @@ public class HighlightUtils {
 
             // for
             int length = preTransChars.length;
+            StringBuilder sb = new StringBuilder();
             for(int i=0;i<length;i++){
                 // 如果当前字符是中文，将转换成汉语拼音字符数组
                 if(Character.toString(preTransChars[i]).matches("[\u4E00-\u9FA5]+")){
                     String[] pinyins = PinyinHelper.toHanyuPinyinStringArray(preTransChars[i], format);
+                    //有缓存的字符串先弄进去
+                    if (!sb.toString().equals("")) {
+                        outputBuilder.append(sb.toString()).append(ADD_CHAR);
+                        sb.delete(0, sb.length());
+                    }
                     outputBuilder.append(pinyins[0]).append(ADD_CHAR);
-                }else{// 如果不是中文，则不转换直接拼接,转小写先
-                    outputBuilder.append(Character.toString(Character.toLowerCase(preTransChars[i]))).append(ADD_CHAR);
+                }else{
+                    // 如果不是中文，则不转换直接拼接,转小写先
+                    preTransChars[i] = Character.toLowerCase(preTransChars[i]);
+                    if (preTransChars[i] >= 0x0061 && preTransChars[i] <= 0x007A) {
+                        sb.append(preTransChars[i]);
+                        continue;
+                    }
+                    if (!sb.toString().equals("")) {
+                        outputBuilder.append(sb.toString()).append(ADD_CHAR);
+                        sb.delete(0, sb.length());
+                    }
+                    outputBuilder.append(Character.toString(preTransChars[i])).append(ADD_CHAR);
                 }
+            }
+            //最后缓存的一些字符
+            if (!sb.toString().equals("")) {
+                outputBuilder.append(sb.toString()).append(ADD_CHAR);
             }
         } catch (BadHanyuPinyinOutputFormatCombination badHanyuPinyinOutputFormatCombination) {
             badHanyuPinyinOutputFormatCombination.printStackTrace();
@@ -304,6 +405,42 @@ public class HighlightUtils {
         return englishPKChinses;
     }
 
+    public static int[] getChineseIndex(String str) {
+        char[] hanzis = str.toCharArray();
+        int[] chinesePKEnglish = new int[100];
+        boolean hasE = false;
+        //拼音下标
+        int indexE = 0;
+        //汉字下标
+        int indexC = 0;
+        while (indexE < hanzis.length){
+
+            chinesePKEnglish[indexC] = indexE;
+            //logger.info("hanzis[indexE] = " + hanzis[indexE]);
+            //如果是英语的话要连起来
+            while ((hanzis[indexE]>=0x0041 && hanzis[indexE]<=0x005A) || (hanzis[indexE]>=0x0061 && hanzis[indexE]<=0x007A)) {
+                indexE++;
+                hasE = true;
+                if(indexE >= hanzis.length) {
+                    break;
+                }
+            }
+            if (!hasE) {
+                indexE++;
+            }
+            hasE = false;
+            indexC++;
+        }
+        chinesePKEnglish[indexC] = -1;
+        /*//测试输出
+        for (int i=0; i<indexC; i++) {
+            System.out.println("汉字下标=" + i + " | 拼音下标=" + chinesePKEnglish[i]);
+        }
+        System.out.println(indexC);*/
+        return chinesePKEnglish;
+    }
+
+
     private static void initMap(int[] map) {
         for (int i=0; i<MAXLENGTH; i++) {
             map[i] = -1;
@@ -317,6 +454,17 @@ public class HighlightUtils {
             sb.append(hanzis[i].charAt(0));
         }
         return sb.toString();
+    }
+
+    //判断字符串是否含有中文
+    private static boolean haveChinese(String str) {
+        String test = "[\\u4E00-\\u9FA5]+";
+        Pattern p = Pattern.compile(test);
+        Matcher m = p.matcher(str);
+        if (m.find()) {
+            return true;
+        }
+        return false;
     }
 
 }

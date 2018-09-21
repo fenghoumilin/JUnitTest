@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cbbb06f1-3b51-49a1-aad5-6bfc19edb0e5" name="Default Changelist" comment="" />
+    <list default="true" id="cbbb06f1-3b51-49a1-aad5-6bfc19edb0e5" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/yelixian/beiqi/highLight/HighlightUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/yelixian/beiqi/highLight/HighlightUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/yelixian/beiqi/highLight/SearchMatchTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/yelixian/beiqi/highLight/SearchMatchTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/com/yelixian/beiqi/highLight/SearchMatchTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/com/yelixian/beiqi/highLight/SearchMatchTest.class" afterDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -25,27 +30,27 @@
         <counts>
           <entry key="java" value="9" />
           <entry key="properties" value="1" />
-          <entry key="xml" value="2" />
+          <entry key="xml" value="3" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="JAVA" value="9" />
           <entry key="Properties" value="1" />
-          <entry key="XML" value="2" />
+          <entry key="XML" value="3" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="dummy" value="58" />
-          <entry key="java" value="6941" />
+          <entry key="java" value="9498" />
           <entry key="properties" value="10" />
           <entry key="xml" value="22" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="6941" />
+          <entry key="JAVA" value="9498" />
           <entry key="PLAIN_TEXT" value="58" />
           <entry key="Properties" value="10" />
           <entry key="XML" value="22" />
@@ -55,11 +60,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/yelixian/beiqi/highLight/HighlightUtils.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="213" selection-start-line="213" selection-end-line="213" />
+            <state relative-caret-position="264">
+              <caret line="179" column="19" selection-end-line="470" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -67,14 +72,23 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/java/com/yelixian/beiqi/highLight/SearchMatchTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="369">
-              <caret line="105" column="30" selection-start-line="105" selection-start-column="30" selection-end-line="105" selection-end-column="30" />
+            <state relative-caret-position="432">
+              <caret line="176" column="47" selection-start-line="176" selection-start-column="47" selection-end-line="176" selection-end-column="47" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/pom.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="539">
+              <caret line="77" column="12" selection-start-line="77" selection-start-column="12" selection-end-line="77" selection-end-column="12" />
             </state>
           </provider>
         </entry>
@@ -97,6 +111,9 @@
       <replace>ansTest</replace>
       <replace>makeHighlight</replace>
     </replaceStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -129,10 +146,13 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="36" />
-    <option name="y" value="29" />
+    <option name="x" value="460" />
+    <option name="y" value="47" />
     <option name="width" value="1814" />
     <option name="height" value="926" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="1" id="Add" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -308,22 +328,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="MyMathTest.addYoutest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="JUnitDemo1" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.junit.util.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.junit.util" />
-      <option name="MAIN_CLASS_NAME" value="com.junit.util.MyMathTest" />
-      <option name="METHOD_NAME" value="addYoutest" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="SearchMatchTest.test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="JUnitDemo1" />
       <extension name="coverage">
@@ -356,20 +360,36 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="SearchMatchTest.test3" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="JUnitDemo1" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.yelixian.beiqi.highLight.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.yelixian.beiqi.highLight" />
+      <option name="MAIN_CLASS_NAME" value="com.yelixian.beiqi.highLight.SearchMatchTest" />
+      <option name="METHOD_NAME" value="test3" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <list>
-      <item itemvalue="JUnit.MyMathTest.addYoutest" />
       <item itemvalue="Application.HighlightUtils" />
       <item itemvalue="Application.MyMath" />
       <item itemvalue="JUnit.SearchMatchTest.test" />
       <item itemvalue="JUnit.SearchMatchTest.test2" />
+      <item itemvalue="JUnit.SearchMatchTest.test3" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.SearchMatchTest.test" />
         <item itemvalue="JUnit.SearchMatchTest.test2" />
+        <item itemvalue="JUnit.SearchMatchTest.test3" />
         <item itemvalue="Application.HighlightUtils" />
         <item itemvalue="Application.MyMath" />
-        <item itemvalue="JUnit.MyMathTest.addYoutest" />
       </list>
     </recent_temporary>
   </component>
@@ -387,47 +407,48 @@
       <workItem from="1537235601028" duration="2258000" />
       <workItem from="1537341608483" duration="14604000" />
       <workItem from="1537406274719" duration="27528000" />
-      <workItem from="1537492398397" duration="4817000" />
+      <workItem from="1537492398397" duration="30549000" />
     </task>
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="SearchMatchTest_test2 - 2018.09.21 at 10h 01m 26s.xml">
+    <history-entry file="SearchMatchTest_test2 - 2018.09.21 at 18h 56m 58s.xml">
       <configuration name="SearchMatchTest.test2" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="SearchMatchTest_test2 - 2018.09.21 at 10h 02m 06s.xml">
-      <configuration name="SearchMatchTest.test2" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="SearchMatchTest_test2 - 2018.09.21 at 10h 03m 24s.xml">
-      <configuration name="SearchMatchTest.test2" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="SearchMatchTest_test2 - 2018.09.21 at 10h 06m 24s.xml">
-      <configuration name="SearchMatchTest.test2" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="SearchMatchTest_test2 - 2018.09.21 at 10h 13m 31s.xml">
-      <configuration name="SearchMatchTest.test2" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="SearchMatchTest_test - 2018.09.21 at 10h 13m 40s.xml">
+    <history-entry file="SearchMatchTest_test - 2018.09.21 at 18h 58m 18s.xml">
       <configuration name="SearchMatchTest.test" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="SearchMatchTest_test2 - 2018.09.21 at 10h 18m 40s.xml">
-      <configuration name="SearchMatchTest.test2" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="SearchMatchTest_test2 - 2018.09.21 at 10h 23m 39s.xml">
-      <configuration name="SearchMatchTest.test2" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="SearchMatchTest_test - 2018.09.21 at 10h 23m 43s.xml">
+    <history-entry file="SearchMatchTest_test - 2018.09.21 at 18h 58m 52s.xml">
       <configuration name="SearchMatchTest.test" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="SearchMatchTest_test - 2018.09.21 at 10h 24m 05s.xml">
+    <history-entry file="SearchMatchTest_test - 2018.09.21 at 18h 59m 16s.xml">
+      <configuration name="SearchMatchTest.test" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="SearchMatchTest_test - 2018.09.21 at 18h 59m 32s.xml">
+      <configuration name="SearchMatchTest.test" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="SearchMatchTest_test - 2018.09.21 at 18h 59m 54s.xml">
+      <configuration name="SearchMatchTest.test" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="SearchMatchTest_test - 2018.09.21 at 19h 01m 30s.xml">
+      <configuration name="SearchMatchTest.test" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="SearchMatchTest_test - 2018.09.21 at 19h 01m 48s.xml">
+      <configuration name="SearchMatchTest.test" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="SearchMatchTest_test - 2018.09.21 at 19h 02m 03s.xml">
+      <configuration name="SearchMatchTest.test" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="SearchMatchTest_test - 2018.09.21 at 19h 02m 15s.xml">
       <configuration name="SearchMatchTest.test" configurationId="JUnit" />
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="51672000" />
+    <option name="totallyTimeSpent" value="77404000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="36" y="29" width="1814" height="926" extended-state="0" />
+    <frame x="460" y="47" width="1814" height="926" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.26128668" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -436,15 +457,15 @@
       <window_info id="Favorites" order="4" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.27577937" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.27458033" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="8" visible="true" weight="0.3297362" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.23021583" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
-      <window_info anchor="bottom" id="Version Control" order="10" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="10" />
       <window_info anchor="bottom" id="Messages" order="11" weight="0.32853717" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -488,13 +509,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1463">
-          <caret line="77" column="12" selection-start-line="77" selection-start-column="12" selection-end-line="77" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_181.jdk/Contents/Home/src.zip!/java/lang/String.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30951">
@@ -513,20 +527,27 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/yelixian/beiqi/highLight/HighlightUtils.java">
+    <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="213" selection-start-line="213" selection-end-line="213" />
+        <state relative-caret-position="539">
+          <caret line="77" column="12" selection-start-line="77" selection-start-column="12" selection-end-line="77" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/yelixian/beiqi/highLight/SearchMatchTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="432">
+          <caret line="176" column="47" selection-start-line="176" selection-start-column="47" selection-end-line="176" selection-end-column="47" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/yelixian/beiqi/highLight/SearchMatchTest.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/yelixian/beiqi/highLight/HighlightUtils.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="369">
-          <caret line="105" column="30" selection-start-line="105" selection-start-column="30" selection-end-line="105" selection-end-column="30" />
+        <state relative-caret-position="264">
+          <caret line="179" column="19" selection-end-line="470" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
